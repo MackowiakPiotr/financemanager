@@ -2,6 +2,7 @@ package account;
 
 import config.ConnectionManager;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.hibernate.Session;
 //import org.hibernate.Session;
 
@@ -26,16 +27,42 @@ public class AccountRepository {
 
     }
 
-    public void delete(Long id) {
-     //  Session session = ConnectionManager.getSession();
+    public void delete(Account account) {
         EntityManager em = ConnectionManager.getEntityManager();
         em.getTransaction().begin();
-        // session.delete(account);
+        String sql = "delete from Account a where ";
+        if(account.getId()!= null){
+            sql = sql + "a.id =:param ";
+            em.createQuery(sql)
+                    .setParameter("param", account.getId())
+                    .executeUpdate();
+        }else if(account.getAccountNumber() != null) {
+            sql = sql + "a.accountNumber =:param ";
+            em.createQuery(sql).setParameter("param", account.getAccountNumber())
+                    .executeUpdate();
 
-        em.createQuery("delete from Account a where a.id = :param")
-                .setParameter("param", id)
-                .executeUpdate();
+        }
+
+
         em.getTransaction().commit();
         em.close();
+    }
+
+    public Account findById(Long id) {
+        EntityManager em = ConnectionManager.getEntityManager();
+        Account foundAccount = em.find(Account.class, id);
+        em.close();
+        return foundAccount;
+
+    }
+
+    public Account findByAccountNumber(String accountNumber) {
+
+        EntityManager em = ConnectionManager.getEntityManager();
+         return (Account) em.createQuery("from Account a where a.accountNumber = :param")
+                .setParameter("param", accountNumber)
+                 .getSingleResult();
+
+
     }
 }

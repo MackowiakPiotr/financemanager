@@ -3,14 +3,24 @@ package expense;
 import account.Account;
 import category.Category;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+@Setter
+@Getter
 @Entity
-
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    private BigDecimal amount;
+    private String comment;
+    @Column(name = "expanse_add_date")
+    private LocalDate expenseAddDate;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
