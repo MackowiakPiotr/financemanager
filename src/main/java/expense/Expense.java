@@ -4,10 +4,13 @@ import account.Account;
 import category.Category;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 @Setter
 @Getter
 @Entity
@@ -26,7 +29,7 @@ public class Expense {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -52,5 +55,16 @@ public class Expense {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", comment='" + comment + '\'' +
+                ", expenseAddDate=" + expenseAddDate +
+                ", category=" + category +
+                '}';
     }
 }

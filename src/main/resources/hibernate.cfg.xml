@@ -6,9 +6,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://sql5.freesqldatabase.com:3306/sql5523521?useSSL=false&amp;serverTimezone=CET</property>
-        <property name="connection.username">sql5523521</property>
-        <property name="connection.password">DqZefGM4nc</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/finance-manager</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">Lolokto3934!</property>
         <property name="connection.pool_size">1</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="current_session_context_class">thread</property>

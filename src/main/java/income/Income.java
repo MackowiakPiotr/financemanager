@@ -37,4 +37,15 @@ public class Income {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    @Override
+    public String toString() {
+        return "Income{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", comment='" + comment + '\'' +
+                ", incomeAddDate=" + incomeAddDate +
+                '}';
+    }
+
 }

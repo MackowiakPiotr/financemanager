@@ -1,11 +1,20 @@
 package account;
 
+import expense.Expense;
+import expense.ExpenseRepository;
+import expense.ExpenseService;
+import income.Income;
+import income.IncomeRepository;
+import income.IncomeService;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class AccountService {
     public static final int MAX_NAME_LENGTH = 100;
     private final AccountRepository accountRepository;
+    private final ExpenseRepository expenseRepository = new ExpenseRepository();
+    private final IncomeRepository incomeRepository = new IncomeRepository();
 
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -28,7 +37,7 @@ public class AccountService {
         List<Account> list = accountRepository.getAccounts();
         list.forEach(account -> System.out.println("Account id: " + account.getId() + "  Account name: " + account.getName()
                 + "\nAccount number: " + account.getAccountNumber()
-                + "\n-----------------------------------------"));
+                + "\n-------------------------------------------"));
     }
 
     public void deleteAccount() {
@@ -54,5 +63,14 @@ public class AccountService {
             }
             default -> System.out.println("Next time select correct number");
         }
+    }
+    public void getExpensesAndIncomes(String accountNumber){
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        List<Expense> expenses = expenseRepository.getExpenses(account);
+        List<Income> incomes = incomeRepository.getIncomes(account);
+        System.out.println("List of expenses and incomes for account number: "+accountNumber  );
+        expenses.forEach(System.out::println);
+        incomes.forEach(System.out::println);
+
     }
 }
