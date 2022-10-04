@@ -7,6 +7,8 @@ import income.Income;
 import income.IncomeRepository;
 import income.IncomeService;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,13 +66,51 @@ public class AccountService {
             default -> System.out.println("Next time select correct number");
         }
     }
-    public void getExpensesAndIncomes(String accountNumber){
+
+    public void getExpensesAndIncomes(String accountNumber) {
         Account account = accountRepository.findByAccountNumber(accountNumber);
         List<Expense> expenses = expenseRepository.getExpenses(account);
         List<Income> incomes = incomeRepository.getIncomes(account);
-        System.out.println("List of expenses and incomes for account number: "+accountNumber  );
+        System.out.println("List of expenses and incomes for account number: " + accountNumber);
         expenses.forEach(System.out::println);
         incomes.forEach(System.out::println);
+    }
 
+    public BigDecimal getSaldo(String accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        List<Expense> expenses = expenseRepository.getExpenses(account);
+        List<Income> incomes = incomeRepository.getIncomes(account);
+
+        BigDecimal sumOfExpences = expenses.stream()
+                .map(Expense::getAmount)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+        BigDecimal sumOfIncomes = incomes.stream()
+                .map(Income::getAmount)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+        return sumOfIncomes.subtract(sumOfExpences);
+
+
+    }
+
+    public BigDecimal getSaldoBetweenDate(String accountNumber, LocalDate startDate, LocalDate endDate) {
+
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        List<Expense> expenses = expenseRepository.getExpenses(account);
+        List<Income> incomes = incomeRepository.getIncomes(account);
+        BigDecimal sumOfExpenses = BigDecimal.ZERO;
+        BigDecimal sumOfIncomes = BigDecimal.ZERO;
+        for (Expense expense : expenses) {
+            if (expense.getExpenseAddDate().isAfter(startDate) && expense.getExpenseAddDate().isBefore(endDate)) {
+                sumOfExpenses = sumOfExpenses.add(expense.getAmount());
+            }
+        }
+        for (Income income : incomes) {
+            if (income.getIncomeAddDate().isAfter(startDate) && income.getIncomeAddDate().isBefore(endDate)) {
+                sumOfIncomes = sumOfIncomes.add(income.getAmount());
+            }
+        }
+        return sumOfIncomes.subtract(sumOfExpenses);
     }
 }

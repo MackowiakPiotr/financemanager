@@ -41,7 +41,8 @@ public class MainApp {
        // incomeDTO1.setAccountNumber("12323434560000786543443409");
        // incomeService.getAllIncomesForAccount(incomeDTO1);
 
-        accountService.getExpensesAndIncomes("12323434560000786543443409");
+       // accountService.getExpensesAndIncomes("12323434560000786543443409");
+        System.out.println(accountService.getSaldo("12323434560000786543443409"));
     }
 
 }
