@@ -28,5 +28,8 @@ public class IncomeService {
         System.out.println("List of incomes for account number: " + account.getAccountNumber());
         incomesList.forEach(System.out::println);
     }
+    public void deleteIncomeById (Long id){
+        incomeRepository.delete(id);
+    }
 
 }

@@ -1,5 +1,6 @@
 import account.AccountRepository;
 import account.AccountService;
+import category.CategoryService;
 import config.ConnectionManager;
 import expense.ExpenseDTO;
 import expense.ExpenseRepository;
@@ -8,11 +9,14 @@ import income.IncomeDTO;
 import income.IncomeService;
 import org.hibernate.Session;
 
+import java.time.LocalDate;
+
 public class MainApp {
     private static AccountRepository accountRepository = new AccountRepository();
     private static AccountService accountService = new AccountService(accountRepository);
     private static ExpenseService expenseService = new ExpenseService();
     private static ExpenseRepository expenseRepository = new ExpenseRepository();
+    private static CategoryService categoryService = new CategoryService();
 
     private static IncomeService incomeService = new IncomeService();
 
@@ -42,7 +46,10 @@ public class MainApp {
        // incomeService.getAllIncomesForAccount(incomeDTO1);
 
        // accountService.getExpensesAndIncomes("12323434560000786543443409");
-        System.out.println(accountService.getSaldo("12323434560000786543443409"));
+        //System.out.println(accountService.getSaldo("12323434560000786543443409"));
+       // System.out.println(accountService.getSaldoBetweenDate("12323434560000786543443409", LocalDate.of(2022, 10, 5), LocalDate.of(2022, 10, 6)));
+
+expenseService.getExpensesForAccountGroupByCategory("12323434560000786543443409");
     }
 
 }

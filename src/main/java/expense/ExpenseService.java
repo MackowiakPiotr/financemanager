@@ -6,6 +6,7 @@ import category.Category;
 import category.CategoryRepository;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 public class ExpenseService {
@@ -26,14 +27,22 @@ public class ExpenseService {
         expenseRepository.add(expense);
     }
 
-    public void getAllExpensesForAccount(ExpenseDTO expenseDTO) {
-        Account account = accountRepository.findByAccountNumber(expenseDTO.getAccountNumber());
+    public void getAllExpensesForAccount(String accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber);
         List<Expense> expenseList = expenseRepository.getExpenses(account);
 
         System.out.println("List of expenses for account number: " + account.getAccountNumber());
         expenseList.forEach(System.out::println);
     }
-    public void deleteExpense(Long id){
+
+    public void getExpensesForAccountGroupByCategory(String accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        List<Expense> expenseList = expenseRepository.getExpenses(account);
+        expenseList.sort(Comparator.comparingLong(e -> e.getCategory().getId()));
+        expenseList.forEach(System.out::println);
+    }
+
+    public void deleteExpenseById(Long id) {
         expenseRepository.delete(id);
     }
 }
