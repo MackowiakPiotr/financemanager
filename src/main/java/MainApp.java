@@ -7,6 +7,7 @@ import expense.ExpenseRepository;
 import expense.ExpenseService;
 import income.IncomeDTO;
 import income.IncomeService;
+import menu.MainMenu;
 import org.hibernate.Session;
 
 import java.time.LocalDate;
@@ -17,39 +18,14 @@ public class MainApp {
     private static ExpenseService expenseService = new ExpenseService();
     private static ExpenseRepository expenseRepository = new ExpenseRepository();
     private static CategoryService categoryService = new CategoryService();
-
     private static IncomeService incomeService = new IncomeService();
-
+    private static MainMenu mainMenu = new MainMenu();
     public static void main(String[] args) {
         Session session = ConnectionManager.getSession();
         session.close();
 
-        /*accountService.addAccount("12323434560000786543443415", "Maco");
-        accountService.addAccount("12323434560000786543443400", "Jaco");
-        accountService.addAccount("12323434560000786543443409", "Waco");*/
+        mainMenu.begin();
 
-        //accountService.showAccounts();
-
-        //   accountService.deleteAccount();
-
-        accountService.showAccounts();
-        //EpenseDTO epenseDTO = new EpenseDTO("12323434560000786543443409", new BigDecimal(305.22), "Bill", "electricity");
-        //IncomeDTO incomeDTO = new IncomeDTO(new BigDecimal(2544.44), "salary", "12323434560000786543443409");
-
-        //expenseService.addExpense(epenseDTO);
-        //incomeService.addIncome(incomeDTO);
-        //ExpenseDTO expenseDTO1 = new ExpenseDTO();
-        //   expenseDTO1.setAccountNumber("12323434560000786543443409");
-        //    expenseService.getAllExpensesForAccount(expenseDTO1);
-     //   IncomeDTO incomeDTO1 = new IncomeDTO();
-       // incomeDTO1.setAccountNumber("12323434560000786543443409");
-       // incomeService.getAllIncomesForAccount(incomeDTO1);
-
-       // accountService.getExpensesAndIncomes("12323434560000786543443409");
-        //System.out.println(accountService.getSaldo("12323434560000786543443409"));
-       // System.out.println(accountService.getSaldoBetweenDate("12323434560000786543443409", LocalDate.of(2022, 10, 5), LocalDate.of(2022, 10, 6)));
-
-expenseService.getExpensesForAccountGroupByCategory("12323434560000786543443409");
     }
 
 }

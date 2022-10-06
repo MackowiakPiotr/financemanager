@@ -25,8 +25,11 @@ public class IncomeRepository {
     public void delete(Long id){
 
         EntityManager em = ConnectionManager.getEntityManager();
-        em.createQuery("delete from Income i where i.id = : id")
-                .setParameter("id",id);
+        em.getTransaction().begin();
+        em.createQuery("delete from Income i where i.id = :id")
+                .setParameter("id",id)
+                        .executeUpdate();
+        em.getTransaction().commit();
         em.close();
     }
 }

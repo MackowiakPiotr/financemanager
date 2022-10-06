@@ -26,8 +26,11 @@ public class ExpenseRepository {
     public void delete(Long id){
 
         EntityManager em = ConnectionManager.getEntityManager();
+        em.getTransaction().begin();
         em.createQuery("delete from Expense e where e.id = : id")
-                .setParameter("id",id);
+                .setParameter("id",id)
+                        .executeUpdate();
+        em.getTransaction().commit();
         em.close();
     }
 }

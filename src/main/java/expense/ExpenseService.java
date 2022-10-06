@@ -45,4 +45,14 @@ public class ExpenseService {
     public void deleteExpenseById(Long id) {
         expenseRepository.delete(id);
     }
+    public void getExpensesBetweenDate(String accountNumber, LocalDate startDate, LocalDate endDate) {
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        List<Expense> expenses = expenseRepository.getExpenses(account);
+        for (Expense expense : expenses) {
+            if (expense.getExpenseAddDate().isAfter(startDate.minusDays(1))
+                    && expense.getExpenseAddDate().isBefore(endDate.plusDays(1))) {
+                System.out.println(expense);
+            }
+        }
+    }
 }
