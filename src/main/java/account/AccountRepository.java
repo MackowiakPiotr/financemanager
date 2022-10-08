@@ -31,21 +31,26 @@ public class AccountRepository {
         EntityManager em = ConnectionManager.getEntityManager();
         em.getTransaction().begin();
         String sql = "delete from Account a where ";
-        if(account.getId()!= null){
+        if (account.getId() != null) {
             sql = sql + "a.id =:param ";
             em.createQuery(sql)
                     .setParameter("param", account.getId())
                     .executeUpdate();
-        }else if(account.getAccountNumber() != null) {
+        } else if (account.getAccountNumber() != null) {
             sql = sql + "a.accountNumber =:param ";
             em.createQuery(sql).setParameter("param", account.getAccountNumber())
                     .executeUpdate();
 
         }
-
-
         em.getTransaction().commit();
         em.close();
+    }
+    public void delete2 (Account account){
+
+        EntityManager em = ConnectionManager.getEntityManager();
+        em.getTransaction().begin();
+        em.remove(account);
+        em.getTransaction().commit();
     }
 
     public Account findById(Long id) {
@@ -59,10 +64,9 @@ public class AccountRepository {
     public Account findByAccountNumber(String accountNumber) {
 
         EntityManager em = ConnectionManager.getEntityManager();
-         return (Account) em.createQuery("from Account a where a.accountNumber = :param")
+        return (Account) em.createQuery("from Account a where a.accountNumber = :param")
                 .setParameter("param", accountNumber)
-                 .getSingleResult();
-
-
+                .getSingleResult();
     }
+
 }

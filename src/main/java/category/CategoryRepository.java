@@ -4,6 +4,8 @@ import account.Account;
 import config.ConnectionManager;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
+
 public class CategoryRepository {
     public Category findByName(String category) {
 
@@ -30,5 +32,11 @@ public class CategoryRepository {
                 .executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
+    }
+
+    public List<Category> getCategories() {
+        EntityManager em = ConnectionManager.getEntityManager();
+        return em.createQuery("from Category c ", Category.class)
+                .getResultList();
     }
 }

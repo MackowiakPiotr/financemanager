@@ -52,15 +52,13 @@ public class AccountService {
             case 1 -> {
                 System.out.println("Write account ID: ");
                 long id = Long.parseLong(scanner.nextLine());
-                account.setId(id);
-                accountRepository.delete(account);
+                accountRepository.delete2(accountRepository.findById(id));
 
             }
             case 2 -> {
                 System.out.println("Write account number: ");
                 String accountNumber = scanner.nextLine();
-                account.setAccountNumber(accountNumber);
-                accountRepository.delete(account);
+                accountRepository.delete2(accountRepository.findByAccountNumber(accountNumber));
 
             }
             default -> System.out.println("Next time select correct number");

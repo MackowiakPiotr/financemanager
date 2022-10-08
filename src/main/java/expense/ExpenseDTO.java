@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -21,8 +22,4 @@ public class ExpenseDTO {
         this.comment = comment;
 
     }
-
-
-
-
 }

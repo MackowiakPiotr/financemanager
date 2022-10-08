@@ -43,7 +43,9 @@ public class ExpenseMenu {
                     BigDecimal amount = BigDecimal.valueOf(Double.parseDouble(scanner.nextLine()));
                     System.out.println("insert comment for expense");
                     String comment = scanner.nextLine();
-                    System.out.println("insert name of category for expense");
+                    System.out.println("Available categories: ");
+                    categoryService.showCategoriesNames();
+                    System.out.println("\ninsert name of category for expense");
                     String categoryName = scanner.nextLine();
                     expenseDTO.setAmount(amount);
                     expenseDTO.setComment(comment);
@@ -64,6 +66,9 @@ public class ExpenseMenu {
                     categoryService.addCategory(categoryName);
                 }
                 case "6" -> {
+                    System.out.println("Available categories");
+                    categoryService.showCategoriesNames();
+                    System.out.println("");
                     System.out.println("Insert name to delete category");
                     String categoryName = scanner.nextLine();
                     categoryService.deleteCategory(categoryName);

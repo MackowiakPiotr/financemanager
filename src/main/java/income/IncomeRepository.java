@@ -2,7 +2,6 @@ package income;
 
 import account.Account;
 import config.ConnectionManager;
-import expense.Expense;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
@@ -22,13 +21,14 @@ public class IncomeRepository {
                 .setParameter("account", account)
                 .getResultList();
     }
-    public void delete(Long id){
+
+    public void delete(Long id) {
 
         EntityManager em = ConnectionManager.getEntityManager();
         em.getTransaction().begin();
         em.createQuery("delete from Income i where i.id = :id")
-                .setParameter("id",id)
-                        .executeUpdate();
+                .setParameter("id", id)
+                .executeUpdate();
         em.getTransaction().commit();
         em.close();
     }

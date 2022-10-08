@@ -2,15 +2,11 @@ import account.AccountRepository;
 import account.AccountService;
 import category.CategoryService;
 import config.ConnectionManager;
-import expense.ExpenseDTO;
 import expense.ExpenseRepository;
 import expense.ExpenseService;
-import income.IncomeDTO;
 import income.IncomeService;
 import menu.MainMenu;
 import org.hibernate.Session;
-
-import java.time.LocalDate;
 
 public class MainApp {
     private static AccountRepository accountRepository = new AccountRepository();
@@ -24,7 +20,8 @@ public class MainApp {
         Session session = ConnectionManager.getSession();
         session.close();
 
-        mainMenu.begin();
+      mainMenu.begin();
+
 
     }
 
