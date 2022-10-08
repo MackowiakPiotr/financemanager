@@ -30,9 +30,10 @@ public class ExpenseMenu {
             System.out.println("[2] Delete expense");
             System.out.println("[3] View all expenses");
             System.out.println("[4] View expenses group by category");
-            System.out.println("[5] Add expense category");
-            System.out.println("[6] Delete expense category");
-            System.out.println("[7] Back to account menu\n");
+            System.out.println("[5] View sum of expenses group by category");
+            System.out.println("[6] Add expense category");
+            System.out.println("[7] Delete expense category");
+            System.out.println("[8] Back to account menu\n");
             System.out.println("Insert selection\n");
 
             selection = scanner.nextLine();
@@ -60,12 +61,13 @@ public class ExpenseMenu {
                 }
                 case "3" -> expenseService.getAllExpensesForAccount(account.getAccountNumber());
                 case "4" -> expenseService.getExpensesForAccountGroupByCategory(account.getAccountNumber());
-                case "5" -> {
+                case "5" -> expenseService.getSumOfExpensesGroupByCategory(account.getAccountNumber());
+                case "6" -> {
                     System.out.println("Insert new name for category");
                     String categoryName = scanner.nextLine();
                     categoryService.addCategory(categoryName);
                 }
-                case "6" -> {
+                case "7" -> {
                     System.out.println("Available categories");
                     categoryService.showCategoriesNames();
                     System.out.println("");
@@ -73,7 +75,7 @@ public class ExpenseMenu {
                     String categoryName = scanner.nextLine();
                     categoryService.deleteCategory(categoryName);
                 }
-                case "7" -> System.out.println("back to account menu");
+                case "8" -> System.out.println("back to account menu");
                 default -> System.out.println("Invalid selection");
             }
 

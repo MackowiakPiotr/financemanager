@@ -4,10 +4,12 @@ import account.Account;
 import account.AccountRepository;
 import category.Category;
 import category.CategoryRepository;
+import category.CategoryService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ExpenseService {
     private final AccountRepository accountRepository = new AccountRepository();
@@ -40,6 +42,19 @@ public class ExpenseService {
         List<Expense> expenseList = expenseRepository.getExpenses(account);
         expenseList.sort(Comparator.comparingLong(e -> e.getCategory().getId()));
         expenseList.forEach(System.out::println);
+    }
+
+    public void getSumOfExpensesGroupByCategory(String accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        List<Expense> expenseList = expenseRepository.getExpenses(account);
+        Map<String, BigDecimal> sumGroupByCat = new HashMap<>();
+        expenseList.stream()
+                .map(Expense::getCategory)
+                .forEach(category1 -> sumGroupByCat.put(category1.getName(), category1
+                        .getExpenseList().stream().map(Expense::getAmount)
+                        .reduce(BigDecimal::add)
+                        .orElse(BigDecimal.ZERO)));
+        System.out.println(sumGroupByCat);
     }
 
     public void deleteExpenseById(Long id) {

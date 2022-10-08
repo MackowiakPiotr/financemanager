@@ -21,7 +21,7 @@ public class MainApp {
         Session session = ConnectionManager.getSession();
         session.close();
 
-    mainMenu.begin();
-
+  //  mainMenu.begin();
+expenseService.getSumOfExpensesGroupByCategory("12323434560000786543443409");
     }
 }
