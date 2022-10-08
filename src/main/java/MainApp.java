@@ -20,8 +20,6 @@ public class MainApp {
     public static void main(String[] args) {
         Session session = ConnectionManager.getSession();
         session.close();
-
-  //  mainMenu.begin();
-expenseService.getSumOfExpensesGroupByCategory("12323434560000786543443409");
+        mainMenu.begin();
     }
 }
