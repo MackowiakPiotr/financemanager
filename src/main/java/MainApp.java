@@ -21,6 +21,7 @@ public class MainApp {
         Session session = ConnectionManager.getSession();
         session.close();
 
-        mainMenu.begin();
+    mainMenu.begin();
+
     }
 }

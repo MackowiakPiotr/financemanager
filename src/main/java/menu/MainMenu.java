@@ -9,13 +9,13 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class MainMenu {
-    private static AccountRepository accountRepository = new AccountRepository();
-    private static AccountService accountService = new AccountService(accountRepository);
-    private static AccountDetailMenu accountDetailMenu = new AccountDetailMenu();
+    private static final AccountRepository accountRepository = new AccountRepository();
+    private static final AccountService accountService = new AccountService(accountRepository);
+    private static final AccountDetailMenu accountDetailMenu = new AccountDetailMenu();
 
     public void begin() {
         Scanner scanner = new Scanner(System.in);
-        String selection = null;
+        String selection;
         do {
 
 
@@ -35,7 +35,15 @@ public class MainMenu {
                     String accountNumber = scanner.nextLine();
                     System.out.println("Insert account name: \n");
                     String name = scanner.nextLine();
-                    accountService.addAccount(accountNumber, name);
+                    String regex = "[^a-z]+";
+                    if (accountNumber.matches(regex)) {
+
+                        try {
+                            accountService.addAccount(accountNumber, name);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } else System.err.println("Bad account number format");
                 }
                 case "2" -> accountService.showAccounts();
                 case "3" -> {
@@ -45,7 +53,7 @@ public class MainMenu {
                     if (choice.equals("1")) {
                         System.out.println("Insert account number: \n");
                         String accountNumber = scanner.nextLine();
-                        Account account = new Account();
+                        Account account;
                         try {
                             account = accountRepository.findByAccountNumber(accountNumber);
                             accountDetailMenu.begin(account);

@@ -41,7 +41,6 @@ public class AccountService {
     }
 
     public void deleteAccount() {
-        Account account = new Account();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Delete account by \n1.ID \n2.Account number");
         int choice = Integer.parseInt(scanner.nextLine());
