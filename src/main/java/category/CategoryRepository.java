@@ -1,6 +1,5 @@
 package category;
 
-import account.Account;
 import config.ConnectionManager;
 import jakarta.persistence.EntityManager;
 

@@ -18,11 +18,11 @@ public class Income {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-@Setter
+    @Setter
     private BigDecimal amount;
-@Setter
+    @Setter
     private String comment;
-@Setter
+    @Setter
     @Column(name = "income_add_date")
     private LocalDate incomeAddDate;
     @ManyToOne
@@ -47,5 +47,4 @@ public class Income {
                 ", incomeAddDate=" + incomeAddDate +
                 '}';
     }
-
 }

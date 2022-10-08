@@ -2,9 +2,6 @@ package income;
 
 import account.Account;
 import account.AccountRepository;
-import expense.Expense;
-import expense.ExpenseDTO;
-
 import java.time.LocalDate;
 import java.util.List;
 

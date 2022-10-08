@@ -1,8 +1,5 @@
 package category;
 
-import config.ConnectionManager;
-import jakarta.persistence.EntityManager;
-
 import java.util.List;
 
 public class CategoryService {
@@ -12,17 +9,15 @@ public class CategoryService {
         Category category = new Category();
         category.setName(name);
         categoryRepository.add(category);
-
     }
 
     public void deleteCategory(String name) {
         Category category = categoryRepository.findByName(name);
         categoryRepository.delete(category);
     }
-    public void showCategoriesNames(){
+
+    public void showCategoriesNames() {
         List<Category> categoryList = categoryRepository.getCategories();
-        categoryList.forEach(e-> System.out.print(e.getName() +", "));
-
-
+        categoryList.forEach(e -> System.out.print(e.getName() + ", "));
     }
 }

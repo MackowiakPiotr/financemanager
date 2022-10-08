@@ -15,13 +15,14 @@ public class AccountDetailMenu {
     AccountService accountService = new AccountService(accountRepository);
     IncomeMenu incomeMenu = new IncomeMenu();
     ExpenseMenu expenseMenu = new ExpenseMenu();
-MainMenu mainMenu = new MainMenu();
+    MainMenu mainMenu = new MainMenu();
+
     public void begin(Account account) {
         Scanner scanner = new Scanner(System.in);
-        String selection = null;
+        String selection =null;
         do {
             System.out.println("<<<<<<<<<< Account Details >>>>>>>>>>\n");
-            System.out.println(account.getName()+ " ["+account.getAccountNumber()+"]");
+            System.out.println(account.getName() + " [" + account.getAccountNumber() + "]");
             System.out.println("[1] Income");
             System.out.println("[2] Expense");
             System.out.println("[3] View expenses and incomes");
@@ -32,11 +33,12 @@ MainMenu mainMenu = new MainMenu();
 
             selection = scanner.nextLine();
 
-            switch (selection){
+            switch (selection) {
                 case "1" -> incomeMenu.begin(account);
                 case "2" -> expenseMenu.begin(account);
                 case "3" -> accountService.getExpensesAndIncomes(account.getAccountNumber());
-                case "4" -> System.out.println("Saldo for account: "+accountService.getSaldo(account.getAccountNumber()));
+                case "4" ->
+                        System.out.println("Saldo for account: " + accountService.getSaldo(account.getAccountNumber()));
                 case "5" -> {
                     System.out.println("Insert start date (YYYY-MM-DD)");
                     String startDate = scanner.nextLine();
@@ -45,14 +47,14 @@ MainMenu mainMenu = new MainMenu();
                     BigDecimal saldoBetweenDate = accountService.getSaldoBetweenDate(account.getAccountNumber(),
                             LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                             LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-                    System.out.println("Saldo between: "+ startDate + " to " +endDate +"\n" + saldoBetweenDate);
+                    System.out.println("Saldo between: " + startDate + " to " + endDate + "\n" + saldoBetweenDate);
 
                 }
                 case "6" -> System.out.println("back to main menu");
                 default -> System.out.println("Invalid selection");
             }
 
-        }while (!Objects.equals(selection, "6"));
+        } while (!Objects.equals(selection, "6"));
     }
 
 }

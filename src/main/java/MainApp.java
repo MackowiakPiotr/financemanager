@@ -16,13 +16,11 @@ public class MainApp {
     private static CategoryService categoryService = new CategoryService();
     private static IncomeService incomeService = new IncomeService();
     private static MainMenu mainMenu = new MainMenu();
+
     public static void main(String[] args) {
         Session session = ConnectionManager.getSession();
         session.close();
 
-      mainMenu.begin();
-
-
+        mainMenu.begin();
     }
-
 }

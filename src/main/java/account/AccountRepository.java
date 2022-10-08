@@ -2,9 +2,7 @@ package account;
 
 import config.ConnectionManager;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import org.hibernate.Session;
-//import org.hibernate.Session;
 
 import java.util.List;
 
@@ -45,7 +43,8 @@ public class AccountRepository {
         em.getTransaction().commit();
         em.close();
     }
-    public void delete2 (Account account){
+
+    public void delete2(Account account) {
 
         EntityManager em = ConnectionManager.getEntityManager();
         em.getTransaction().begin();
@@ -68,5 +67,4 @@ public class AccountRepository {
                 .setParameter("param", accountNumber)
                 .getSingleResult();
     }
-
 }

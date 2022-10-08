@@ -2,10 +2,8 @@ package account;
 
 import expense.Expense;
 import expense.ExpenseRepository;
-import expense.ExpenseService;
 import income.Income;
 import income.IncomeRepository;
-import income.IncomeService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -89,7 +87,6 @@ public class AccountService {
                 .orElse(BigDecimal.ZERO);
         return sumOfIncomes.subtract(sumOfExpences);
 
-
     }
 
     public BigDecimal getSaldoBetweenDate(String accountNumber, LocalDate startDate, LocalDate endDate) {
@@ -113,6 +110,4 @@ public class AccountService {
         }
         return sumOfIncomes.subtract(sumOfExpenses);
     }
-
-
 }
